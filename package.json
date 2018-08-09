@@ -4,9 +4,9 @@
     "build": "mkdir -p dist; spec-md spec/OpenCRUD.md > dist/index.html",
     "watch": "mkdir -p dist; nodemon --exec 'spec-md > dist/index.html' spec/OpenCRUD.md",
     "test-zh": "spec-md spec/OpenCRUD-zh.md > /dev/null",
-    "build-zh": "mkdir -p dist-zh; spec-md spec/OpenCRUD-zh.md > dist-zh/index.html",
-    "watch-zh": "mkdir -p dist-zh; nodemon --exec 'spec-md > dist-zh/index.html' spec/OpenCRUD-zh.md",
-    "live":"live-server --open=./dist-zh"
+    "build-zh": "mkdir -p dist-zh; spec-md spec/OpenCRUD-zh.md > index.html",
+    "watch-zh": "mkdir -p dist-zh; nodemon --exec 'spec-md > index.html' spec/OpenCRUD-zh.md",
+    "live":"live-server "
   },
   "devDependencies": {
     "live-server": "^1.2.0",

@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<!-- Built with spec-md -->
+<html><head><meta charset="utf-8"><title>OpenCRUD</title><style>body {
+  color: #333333;
+  font: 13pt/18pt Cambria, "Palatino Linotype", Palatino, "Liberation Serif", serif;
+  margin: 6rem auto 3rem;
+  max-width: 780px;
+}
+
+
+/* Links */
+
+a {
+  color: #3B5998;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+
+/* Section headers */
+
+h1, h2, h3, h4, h5, h6, h7, h8 {
+  margin: 3rem 0 1em;
+  position: relative;
+}
+
+h1 {
+  font-size: 1.5em;
+  margin: 8rem 0 2em;
+}
+
+h2 {
+  font-size: 1.45em;
+  margin: 8rem 0 1em;
+}
+
+h3 {
+  font-size: 1.30em;
+  margin: 5rem 0 1em;
+}
+
+h4 {
+  font-size: 1.20em;
+}
+
+h5 {
+  font-size: 1.12em;
+}
+
+h6, h7, h8 {
+  font-size: 1.1em;
+}
+
+section .spec-secid {
+  margin-right: 1ex;
+  position: absolute;
+  right: 100%;
+  text-align: right;
+  white-space: nowrap;
+}
+
+footer {
+  font-size: 75%;
+  opacity: 0.5;
+  text-align: center;
+  margin-top: 12rem;
+}
+
+
+/* Table of contents */
+
+.spec-toc {
+  margin: 1rem 0 3rem;
+}
+
+.spec-toc .title {
+  content: 'Contents';
+  display: block;
+  font-weight: bold;
+  margin: 3rem 0 1rem;
+}
+
+.spec-toc .spec-secid {
+  margin-right: 1ex;
+}
+
+.spec-toc ol {
+  list-style: none;
+  padding-left: 0;
+}
+
+.spec-toc ol ol {
+  list-style: none;
+  padding-left: 2ex;
+}
+
+.spec-toc li {
+  position: relative;
+  padding: 5px 0 0 30px;
+  margin: -5px 0 0 -30px;
+}
+
+.spec-toc a {
+  color: #333333;
+}
+
+.spec-toc a:hover {
+  text-decoration: none;
+}
+
+.spec-toc a .spec-secid {
+  color: #3B5998;
+}
+
+.spec-toc a:hover .spec-secid {
+  text-decoration: underline;
+}
+
+.spec-toc .toggle {
+  display: none;
+}
+
+.spec-toc .toggle + label {
+  cursor: pointer;
+  left: 10px;
+  opacity: 1;
+  padding: 3px 5px 3px 6px;
+  position: absolute;
+  top: 8px;
+  transform: rotate(0deg);
+  transition: all 0.18s ease-in-out;
+}
+
+.spec-toc .toggle + label:after {
+  border-color: transparent transparent transparent #bbc;
+  border-style: solid;
+  border-width: 6px 0 6px 7px;
+  content: ' ';
+  display: block;
+  height: 0;
+  width: 0;
+}
+
+.spec-toc .toggle:checked + label {
+  transform: rotate(90deg);
+}
+
+.spec-toc li:not(:hover) > .toggle:checked + label {
+  opacity: 0;
+}
+
+.spec-toc .toggle:not(:checked) ~ ol {
+  max-height: 0;
+  overflow: hidden;
+}
+
+
+/* Sidebar */
+
+.spec-sidebar-toggle {
+  display: none;
+}
+
+.spec-sidebar-toggle + label {
+  position: fixed;
+  right: 0;
+  top: 0;
+  padding: 10px 15px;
+  font-size: 30px;
+  color: rgba(0,0,0,0.7);
+  z-index: 2;
+  cursor: pointer;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.spec-sidebar {
+  display: none;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 320px;
+  font-size: 80%;
+  overflow-y: scroll;
+  height: 100%;
+  padding: 0 0 5rem 30px;
+  box-sizing: border-box;
+  background: #f0f0f0;
+}
+
+.spec-sidebar-toggle:checked ~ .spec-sidebar {
+  display: block;
+  box-shadow:
+    -1px 0 rgba(0,0,0,0.12),
+    -4px 0 8px -2px rgba(0,0,0,0.05);
+}
+
+.spec-sidebar .viewing > a:after {
+  color: #8b9;
+  content: '\2022';
+  margin-left: 1ex;
+}
+
+@media (min-width: 1240px) {
+  .spec-sidebar-toggle + label {
+    display: none;
+  }
+
+  .spec-sidebar {
+    display: block;
+    box-shadow:
+      inset 1px 0 rgba(0,0,0,0.05),
+      inset 4px 0 8px -2px rgba(0,0,0,0.08) !important;
+  }
+
+  body {
+    padding-right: 300px;
+  }
+}
+
+
+/* Notes */
+
+.spec-note {
+  background: #FEFEF3;
+  border-left: solid 4px #F4E925;
+  margin: 1em -1em;
+  min-width: 416px;
+  padding: 1ex 1em 1ex calc(1em - 4px);
+  width: -moz-fit-content;
+  width: -webkit-fit-content;
+  width: fit-content;
+}
+
+.spec-note::before {
+  color: #6C6613;
+  content: 'Note';
+  display: block;
+  font: italic 11pt/18pt Cambria, "Palatino Linotype", Palatino, "Liberation Serif", serif;
+  opacity: 0.6;
+  user-select: none;
+}
+
+
+/* Todos */
+
+.spec-todo {
+  color: #666666;
+  margin: 1em 0 1em 5em;
+  min-height: 1em;
+}
+
+.spec-todo::before {
+  content: 'todo';
+  display: block;
+  float: left;
+  margin-left: -5em;
+  text-transform: uppercase;
+}
+
+/* Index table */
+
+.spec-index ol {
+  list-style-type: none;
+  margin: 0 0 0 2rem;
+  padding: 0;
+  column-width: 210px;
+  column-gap: 2rem;
+}
+
+.spec-index ol li {
+  width: min-content;
+}
+
+/* Code */
+
+code {
+  background: #FAFAFA;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 85%;
+  font-weight: inherit;
+  margin: -2px -1px;
+  padding: 3px 3px;
+  white-space: pre;
+}
+
+pre code {
+  background: none;
+  font-weight: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+pre {
+  background: #FAFAFA;
+  border-left: solid 4px #E9E9E9;
+  margin: 1em -1em;
+  min-width: 40ch;
+  padding: 1ex 1em 1ex calc(1em - 4px);
+  width: -moz-fit-content;
+  width: -webkit-fit-content;
+  width: fit-content;
+}
+
+.spec-example {
+  background: #FAFAFF;
+  border-left: solid 4px #BBBBFF;
+}
+
+.spec-counter-example {
+  background: #FFFAFA;
+  border-left: solid 4px #FFBBBB;
+}
+
+.spec-example > a,
+.spec-counter-example > a {
+  display: block;
+  font: italic 11pt/18pt Cambria, "Palatino Linotype", Palatino, "Liberation Serif", serif;
+  opacity: 0.6;
+  user-select: none;
+}
+
+.spec-counter-example > a {
+  color: #98593b;
+}
+
+
+/* Tables */
+
+table {
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #F9F9F9;
+}
+
+td, th {
+  border: 1px solid #D0D0D0;
+  padding: 0.4em;
+  vertical-align: baseline;
+}
+
+
+/* Edits */
+
+ins {
+  background-color: rgba(0, 200, 30, 0.08);
+  text-decoration: none;
+}
+
+del {
+  background-color: rgba(200, 0, 0, 0.08);
+}
+
+.spec-added, .spec-removed {
+  border-left: 4px solid;
+  margin-left: -18px;
+  padding-left: 14px;
+}
+
+.spec-added {
+  border-color: #396;
+}
+
+.spec-removed {
+  border-color: #933;
+  text-decoration: line-through;
+}
+
+
+/* Values */
+
+.spec-keyword {
+  font-weight: bold;
+}
+
+.spec-string {
+  font-family: Consolas, Monaco, monospace;
+  white-space: pre;
+}
+
+var {
+  font-style: italic;
+}
+
+*[data-name] {
+  transition: 0.15s background ease-out;
+  border-radius: 2px;
+  padding: 0 3px;
+  margin: 0 -3px;
+}
+
+
+/* Grammar semantics, algorithms and calls */
+
+.spec-semantic,
+.spec-algo {
+  margin: 1rem 0 1rem 2rem;
+}
+
+.spec-semantic > .spec-rhs {
+  display: inline-block;
+  margin-left: 1ex;
+}
+
+.spec-semantic > .spec-nt::after,
+.spec-algo > .spec-call:first-child::after {
+  content: ':';
+  font-style: normal;
+  font-weight: bold;
+  margin-left: 1ex;
+}
+
+.spec-semantic ol, .spec-semantic ol ol ol ol,
+.spec-algo ol, .spec-algo ol ol ol ol {
+  list-style-type: decimal;
+}
+
+.spec-semantic ol ol, .spec-semantic ol ol ol ol ol,
+.spec-algo ol ol, .spec-algo ol ol ol ol ol {
+  list-style-type: lower-alpha;
+}
+
+.spec-semantic ol ol ol, .spec-semantic ol ol ol ol ol ol,
+.spec-algo ol ol ol, .spec-algo ol ol ol ol ol ol {
+  list-style-type: lower-roman;
+}
+
+.spec-call > a {
+  color: inherit;
+}
+
+
+/* Grammar productions */
+
+.spec-production {
+  margin: 1rem 0 1rem 2rem;
+}
+
+.spec-production > .spec-nt::after {
+  content: ':';
+  font-style: normal;
+  font-weight: bold;
+  margin: 0 1ex;
+}
+
+.spec-semantic.d2 > .spec-nt::after,
+.spec-production.d2 > .spec-nt::after {
+  content: '::';
+}
+
+.spec-semantic.d3 > .spec-nt::after,
+.spec-production.d3 > .spec-nt::after {
+  content: ':::';
+}
+
+.spec-rhs {
+  margin-left: 2rem;
+}
+
+.spec-oneof {
+  display: inline;
+}
+
+.spec-oneof::before {
+  content: 'one of';
+  font-style: normal;
+  font-weight: bold;
+}
+
+.spec-oneof > table {
+  margin-left: 2rem;
+}
+
+.spec-oneof .spec-rhs {
+  border: none;
+  margin: 0;
+  padding: 0 0.5em;
+  vertical-align: baseline;
+}
+
+.spec-rhs .spec-constrained:not(:first-child),
+.spec-rhs .spec-quantified:not(:first-child),
+.spec-rhs .spec-nt:not(:first-child),
+.spec-rhs .spec-t:not(:first-child),
+.spec-rhs .spec-rx:not(:first-child),
+.spec-rhs .spec-prose:not(:first-child),
+.spec-rhs .spec-empty:not(:first-child),
+.spec-rhs .spec-lookahead:not(:first-child) {
+  margin-left: 1ex;
+}
+
+.spec-condition {
+  font-size: 85%;
+}
+
+.spec-condition::before {
+  content: '[+'
+}
+
+.spec-condition.not::before {
+  content: '[~'
+}
+
+.spec-condition::after {
+  content: ']'
+}
+
+.spec-empty,
+.spec-prose {
+  color: #666666;
+}
+
+.spec-nt {
+  font-style: italic;
+}
+
+.spec-nt > a {
+  color: inherit;
+}
+
+.spec-quantifiers,
+.spec-params {
+  font-size: 65%;
+  font-style: normal;
+  vertical-align: sub;
+}
+
+.spec-quantifier.list {
+  color: #3348D3;
+}
+
+.spec-quantifier.optional {
+  color: #83238E;
+}
+
+.spec-params,
+.spec-condition {
+  color: #1C7758;
+}
+
+.spec-params::before {
+  content: '[';
+}
+
+.spec-params::after {
+  content: ']';
+}
+
+.spec-quantifier:not(:last-child)::after,
+.spec-param:not(:last-child)::after {
+  color: #666666;
+  content: ', ';
+}
+
+.spec-param.conditional::before {
+  content: '?';
+}
+
+.spec-t, .spec-rx {
+  color: #333333;
+  font-family: monospace;
+  font-weight: bold;
+}
+
+.spec-butnot::before {
+  color: #666666;
+  content: 'but not';
+  font-family: Cambria, "Palatino Linotype", Palatino, "Liberation Serif", serif;
+  font-weight: normal;
+  margin-right: 1ex;
+}
+
+.spec-butnot > *:not(:first-child)::before {
+  color: #666666;
+  content: 'or';
+  font-family: Cambria, "Palatino Linotype", Palatino, "Liberation Serif", serif;
+  font-weight: normal;
+  margin-right: 1ex;
+}
+
+.spec-rhs .spec-oneof::before,
+.spec-rhs .spec-butnot::before {
+  margin-left: 1ex;
+}
+
+.spec-lookahead > * {
+  margin: 0 !important;
+}
+
+.spec-lookahead > *:not(:first-child)::before {
+  color: #666666;
+  content: ', ';
+  font-family: Cambria, "Palatino Linotype", Palatino, "Liberation Serif", serif;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.spec-lookahead::before {
+  color: #666666;
+  content: '[lookahead = ';
+  font-family: Cambria, "Palatino Linotype", Palatino, "Liberation Serif", serif;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.spec-lookahead.not::before {
+  content: '[lookahead \2260  ';
+}
+
+.spec-lookahead.set::before {
+  content: '[lookahead \2208  {';
+  margin-right: 0;
+}
+
+.spec-lookahead.set.not::before {
+  content: '[lookahead \2209  {';
+}
+
+.spec-lookahead::after {
+  color: #666666;
+  content: ']';
+}
+
+.spec-lookahead.set::after {
+  content: '}]';
+}
+</style><style>/* Copied from node_modules/prismjs/themes/prism.css */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #a67f59;
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+</style><script>(function (){
+var styleSheet = document.getElementsByTagName('style')[0].sheet;
+var ruleIndex;
+
+function removeHighlight() {
+  if (ruleIndex) {
+    styleSheet.deleteRule(ruleIndex);
+    ruleIndex = void 0;
+  }
+}
+
+function highlightKeyword(name) {
+  removeHighlight();
+  ruleIndex = styleSheet.insertRule(
+    '*[data-name="' + name + '"] { background: #FBF8D0; }',
+    styleSheet.cssRules.length
+  );
+}
+
+document.documentElement.addEventListener('mouseover', function (event) {
+  var nameAttribute = event.target.attributes['data-name'];
+  if (nameAttribute) {
+    highlightKeyword(nameAttribute.value);
+  }
+});
+
+document.documentElement.addEventListener('mouseout', removeHighlight);
+})()</script></head><body><header><h1>OpenCRUD</h1><section id="intro"><p><em>Working Draft &ndash; April 2018</em></p><p><strong>介绍</strong></p><p>TBD</p></section><nav class="spec-toc"><div class="title">Contents</div><ol><li><a href="#sec-undefined.-"><span class="spec-secid">1</span>概述</a><input hidden class="toggle" type="checkbox" checked id="_toggle_1" /><label for="_toggle_1"></label><ol><li><a href="#sec-undefined.-.-"><span class="spec-secid">1.1</span>依据</a></li><li><a href="#sec-undefined.-.-"><span class="spec-secid">1.2</span>参考实现</a></li></ol></li><li><a href="#sec-undefined.-"><span class="spec-secid">2</span>关系</a><input hidden class="toggle" type="checkbox" checked id="_toggle_2" /><label for="_toggle_2"></label><ol><li><a href="#sec-undefined.-.-"><span class="spec-secid">2.1</span>覆盖的领域</a></li><li><a href="#sec--api-"><span class="spec-secid">2.2</span>关注api，不包含实现以及运行时的特性</a></li><li><a href="#sec-SDL"><span class="spec-secid">2.3</span>SDL</a></li><li><a href="#sec-Queries"><span class="spec-secid">2.4</span>Queries</a><input hidden class="toggle" type="checkbox" checked id="_toggle_2.4" /><label for="_toggle_2.4"></label><ol><li><a href="#sec-Queries.Queries-"><span class="spec-secid">2.4.1</span>Queries: 顶级</a><input hidden class="toggle" type="checkbox" checked id="_toggle_2.4.1" /><label for="_toggle_2.4.1"></label><ol><li><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.1.1</span>概述</a></li><li><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.1.2</span>单字段</a></li><li><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.1.3</span>多字段</a></li><li><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.1.4</span>多连接字段</a></li><li><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.1.5</span>节点字段</a></li><li><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.1.6</span>命名</a></li><li><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.1.7</span>示例</a></li></ol></li><li><a href="#sec-Queries.Queries-"><span class="spec-secid">2.4.2</span>Queries: 关系</a><input hidden class="toggle" type="checkbox" checked id="_toggle_2.4.2" /><label for="_toggle_2.4.2"></label><ol><li><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.2.1</span>概述</a></li><li><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.2.2</span>连接</a></li><li><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.2.3</span>实例</a></li></ol></li><li><a href="#sec-Queries.Queries-"><span class="spec-secid">2.4.3</span>Queries: 过滤器</a><input hidden class="toggle" type="checkbox" checked id="_toggle_2.4.3" /><label for="_toggle_2.4.3"></label><ol><li><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.3.1</span>概述</a></li><li><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.3.2</span>数据类型</a></li><li><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.3.3</span>单字段</a></li><li><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.3.4</span>多字段</a></li><li><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.3.5</span>布尔表达式</a></li><li><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.3.6</span>交叉关系过滤器</a></li></ol></li><li><a href="#sec-Queries.Queries-"><span class="spec-secid">2.4.4</span>Queries: 聚合</a></li></ol></li><li><a href="#sec-Mutations"><span class="spec-secid">2.5</span>Mutations</a><input hidden class="toggle" type="checkbox" checked id="_toggle_2.5" /><label for="_toggle_2.5"></label><ol><li><a href="#sec-Mutations-CRUD"><span class="spec-secid">2.5.1</span>Mutations: CRUD</a><input hidden class="toggle" type="checkbox" checked id="_toggle_2.5.1" /><label for="_toggle_2.5.1"></label><ol><li><a href="#sec-Mutations-CRUD.-"><span class="spec-secid">2.5.1.1</span>概述</a></li><li><a href="#sec-Create"><span class="spec-secid">2.5.1.2</span>Create</a></li><li><a href="#sec-Mutations-CRUD.Update"><span class="spec-secid">2.5.1.3</span>Update</a></li><li><a href="#sec-Mutations-CRUD.Delete"><span class="spec-secid">2.5.1.4</span>Delete</a></li></ol></li><li><a href="#sec-Mutationa-"><span class="spec-secid">2.5.2</span>Mutationa: 批量操作</a><input hidden class="toggle" type="checkbox" checked id="_toggle_2.5.2" /><label for="_toggle_2.5.2"></label><ol><li><a href="#sec-Mutationa-.-"><span class="spec-secid">2.5.2.1</span>概述</a></li><li><a href="#sec-Mutationa-.Update"><span class="spec-secid">2.5.2.2</span>Update</a></li><li><a href="#sec-Mutationa-.Delete"><span class="spec-secid">2.5.2.3</span>Delete</a></li></ol></li><li><a href="#sec-Mutations-"><span class="spec-secid">2.5.3</span>Mutations: 嵌套</a><input hidden class="toggle" type="checkbox" checked id="_toggle_2.5.3" /><label for="_toggle_2.5.3"></label><ol><li><a href="#sec-Overview"><span class="spec-secid">2.5.3.1</span>Overview</a></li></ol></li></ol></li></ol></li></ol></nav></header><section id="sec-undefined.-" secid="1"><h2><span class="spec-secid" title="link to this section"><a href="#sec-undefined.-">1</a></span>概述</h2><p>OpenCRUD是一种完全兼容<a href="http://facebook.github.io/graphql/">GraphQL compliant</a>的查询语言，用于访问和修改数据。OpenCRUD为许多流行的数据库提供API风格，包括MySQL和MongoDB。</p><p>例如，此OpenCRUD查询检索单个用户：</p><pre><code><span class="token punctuation">{</span>
+  user<span class="token punctuation">(</span><span class="token attr-name">where</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token attr-name">id</span><span class="token punctuation">:</span> <span class="token number">4</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    name
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>returns:</p><pre><code><span class="token punctuation">{</span>
+  <span class="token property">"user"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"Mark Zuckerberg"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><section id="sec-undefined.-.-" secid="1.1"><h3><span class="spec-secid" title="link to this section"><a href="#sec-undefined.-.-">1.1</a></span>依据</h3><p>GraphQL是一种灵活的查询语言，支持许多不同的数据访问模式。实际上，简单的CRUD操作是一种非常常见的模式。标准化这种非常常见的模式使社区能够构建特定于常见CRUD样式API的工具。</p></section><section id="sec-undefined.-.-" secid="1.2"><h3><span class="spec-secid" title="link to this section"><a href="#sec-undefined.-.-">1.2</a></span>参考实现</h3><p><a href="https://github.com/graphcool/prisma">Prisma</a> 是OpenCRUD的参考实现 </p></section></section><section id="sec-undefined.-" secid="2"><h2><span class="spec-secid" title="link to this section"><a href="#sec-undefined.-">2</a></span>关系</h2><ul><li>覆盖的领域</li><li>关注api，不包含实现以及运行时的特性</li><li>SDL</li></ul><section id="sec-undefined.-.-" secid="2.1"><h3><span class="spec-secid" title="link to this section"><a href="#sec-undefined.-.-">2.1</a></span>覆盖的领域</h3><p>该规范描述了适用于关系数据库的灵活GraphQL API的所有方面</p></section><section id="sec--api-" secid="2.2"><h3><span class="spec-secid" title="link to this section"><a href="#sec--api-">2.2</a></span>关注api，不包含实现以及运行时的特性</h3><p>OpenCrud是GraphQL API的规范集合，旨在与特定的数据库技术配合使用。OpenCRUD关注API表面，而不是实现。因此，OpenCRUD的两个实现可以选择以不同的方式存储数据，但是通过OpenCRUD API与数据交互的应用程序将无法区分。</p></section><section id="sec-SDL" secid="2.3"><h3><span class="spec-secid" title="link to this section"><a href="#sec-SDL">2.3</a></span>SDL</h3><p>本规范中使用的示例显示了为特定数据模型生成的最终模式。在所有示例中，SDL表示法用于定义数据模型。SDL的好处在于它与数据库无关，因此我们可以在所有支持的数据库中使用相同的表示法。</p><p>在本规范的示例SDL中使用时，以下指令具有特殊含义：</p><ul><li><code>@unique</code>：该字段具有唯一约束</li><li><code>@relation</code>：指定两个字段之间的关系</li></ul></section><section id="sec-Queries" secid="2.4"><h3><span class="spec-secid" title="link to this section"><a href="#sec-Queries">2.4</a></span>Queries</h3><section id="sec-Queries.Queries-" secid="2.4.1"><h4><span class="spec-secid" title="link to this section"><a href="#sec-Queries.Queries-">2.4.1</a></span>Queries: 顶级</h4><ul><li>概述</li><li>单字段多字段</li><li>多连接字段</li><li>节点字段</li><li>例子</li></ul><section id="sec-Queries.Queries-.-" secid="2.4.1.1"><h5><span class="spec-secid" title="link to this section"><a href="#sec-Queries.Queries-.-">2.4.1.1</a></span>概述</h5><p>GraphQL定义顶级<code>Query</code>类型。OpenCRUD定义了为每种数据库类型生成的多个顶级字段（关系数据库中的表） s</p></section><section id="sec-Queries.Queries-.-" secid="2.4.1.2"><h5><span class="spec-secid" title="link to this section"><a href="#sec-Queries.Queries-.-">2.4.1.2</a></span>单字段</h5><p>检索单个数据记录。</p></section><section id="sec-Queries.Queries-.-" secid="2.4.1.3"><h5><span class="spec-secid" title="link to this section"><a href="#sec-Queries.Queries-.-">2.4.1.3</a></span>多字段</h5><p>检索多个数据记录</p></section><section id="sec-Queries.Queries-.-" secid="2.4.1.4"><h5><span class="spec-secid" title="link to this section"><a href="#sec-Queries.Queries-.-">2.4.1.4</a></span>多连接字段</h5><p>检索多个数据记录。此字段兼容<a href="https://facebook.github.io/relay/docs/en/graphql-server-specification.html">Relay compliant</a>，同时包含子字段<code>aggregate</code>和<code>groupBy</code>子字段。</p></section><section id="sec-Queries.Queries-.-" secid="2.4.1.5"><h5><span class="spec-secid" title="link to this section"><a href="#sec-Queries.Queries-.-">2.4.1.5</a></span>节点字段</h5><p>节点字段由<a href="https://facebook.github.io/relay/docs/en/graphql-server-specification.html">Relay spec</a>规范指定，并允许客户端通过其id检索任何数据记录。</p></section><section id="sec-Queries.Queries-.-" secid="2.4.1.6"><h5><span class="spec-secid" title="link to this section"><a href="#sec-Queries.Queries-.-">2.4.1.6</a></span>命名</h5><p>OpenCRUD未指定必须如何命名为每种数据类型生成的字段。由每个OpenCRUD实现决定一个命名系统。参考实现使用followig命名约定：</p><ul><li>单字段： <code>[data type name]</code></li><li>多字段: <code>[pluralized data type name]</code> (using the <a href="https://github.com/atteo/evo-inflector">evo&#8208;inflector library</a>)</li><li>多连接字段：<code>[pluralized data type name]Connection</code></li></ul><p>OpenCRUD实现可以选择使字段名称可配置而不是基于约定。</p></section><section id="sec-Queries.Queries-.-" secid="2.4.1.7"><h5><span class="spec-secid" title="link to this section"><a href="#sec-Queries.Queries-.-">2.4.1.7</a></span>示例</h5><p>此示例说明了所有顶级字段</p><p><strong>数据模型</strong></p><pre><code>type User <span class="token punctuation">{</span>
+  <span class="token attr-name">id</span><span class="token punctuation">:</span> ID<span class="token operator">!</span> <span class="token directive function">@unique</span>
+  <span class="token attr-name">name</span><span class="token punctuation">:</span> String<span class="token operator">!</span>
+<span class="token punctuation">}</span>
+</code></pre><p><strong>生成的schema</strong></p><pre><code>type Query <span class="token punctuation">{</span>
+  users<span class="token punctuation">(</span>
+    <span class="token attr-name">where</span><span class="token punctuation">:</span> UserWhereInput
+    <span class="token attr-name">orderBy</span><span class="token punctuation">:</span> UserOrderByInput
+    <span class="token attr-name">skip</span><span class="token punctuation">:</span> Int
+    <span class="token attr-name">after</span><span class="token punctuation">:</span> String
+    <span class="token attr-name">before</span><span class="token punctuation">:</span> String
+    <span class="token attr-name">first</span><span class="token punctuation">:</span> Int
+    <span class="token attr-name">last</span><span class="token punctuation">:</span> Int
+  <span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>User<span class="token punctuation">]</span><span class="token operator">!</span>
+  user<span class="token punctuation">(</span><span class="token attr-name">where</span><span class="token punctuation">:</span> UserWhereUniqueInput<span class="token operator">!</span><span class="token punctuation">)</span><span class="token punctuation">:</span> User
+  usersConnection<span class="token punctuation">(</span>
+    <span class="token attr-name">where</span><span class="token punctuation">:</span> UserWhereInput
+    <span class="token attr-name">orderBy</span><span class="token punctuation">:</span> UserOrderByInput
+    <span class="token attr-name">skip</span><span class="token punctuation">:</span> Int
+    <span class="token attr-name">after</span><span class="token punctuation">:</span> String
+    <span class="token attr-name">before</span><span class="token punctuation">:</span> String
+    <span class="token attr-name">first</span><span class="token punctuation">:</span> Int
+    <span class="token attr-name">last</span><span class="token punctuation">:</span> Int
+  <span class="token punctuation">)</span><span class="token punctuation">:</span> UserConnection<span class="token operator">!</span>
+  node<span class="token punctuation">(</span><span class="token attr-name">id</span><span class="token punctuation">:</span> ID<span class="token operator">!</span><span class="token punctuation">)</span><span class="token punctuation">:</span> Node
+<span class="token punctuation">}</span>
+</code></pre><p><strong>Query</strong></p><pre><code><span class="token keyword">query</span> <span class="token punctuation">{</span>
+  user<span class="token punctuation">(</span><span class="token attr-name">where</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token attr-name">id</span><span class="token punctuation">:</span> <span class="token string">"1"</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    name
+  <span class="token punctuation">}</span>
+  users<span class="token punctuation">(</span><span class="token attr-name">where</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token attr-name">name_contains</span><span class="token punctuation">:</span> <span class="token string">"Karl"</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    name
+  <span class="token punctuation">}</span>
+  usersConnection<span class="token punctuation">(</span><span class="token attr-name">where</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token attr-name">name_contains</span><span class="token punctuation">:</span> <span class="token string">"Karl"</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    edges <span class="token punctuation">{</span>
+      node <span class="token punctuation">{</span>
+        name
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  node<span class="token punctuation">(</span><span class="token attr-name">id</span><span class="token punctuation">:</span> <span class="token string">"1"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    name
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></section></section><section id="sec-Queries.Queries-" secid="2.4.2"><h4><span class="spec-secid" title="link to this section"><a href="#sec-Queries.Queries-">2.4.2</a></span>Queries: 关系</h4><ul><li>概述</li><li>连接<ul><li>聚合</li><li>游标</li></ul></li><li>实例</li></ul><section id="sec-Queries.Queries-.-" secid="2.4.2.1"><h5><span class="spec-secid" title="link to this section"><a href="#sec-Queries.Queries-.-">2.4.2.1</a></span>概述</h5><p>In relational databases a relation is used to connecto two related tables. OpenCRUD defines how relations are exposed in the GraphQL schema. Relations in OpenCRUD generate two fields: 在关系数据库中，关联用于连接两个相关表。OpenCRUD定义了如何暴露在GraphQL schema 关联。OpenCRUD中的关联生成两个字段：</p><ul><li><code>multi fields</code> 适用于需要检索相关数据的大多数情况</li><li><code>multi connection fields</code> 与Relay兼容并包含支持avdanced聚合的aggrete和groupBy字段。</li></ul></section><section id="sec-Queries.Queries-.-" secid="2.4.2.2"><h5><span class="spec-secid" title="link to this section"><a href="#sec-Queries.Queries-.-">2.4.2.2</a></span>连接</h5><p>&gt; WIP</p></section><section id="sec-Queries.Queries-.-" secid="2.4.2.3"><h5><span class="spec-secid" title="link to this section"><a href="#sec-Queries.Queries-.-">2.4.2.3</a></span>实例</h5><p>此示例说明了所有顶级字段</p><p><strong>数据模型</strong></p><pre><code>type User <span class="token punctuation">{</span>
+  <span class="token attr-name">id</span><span class="token punctuation">:</span> ID<span class="token operator">!</span> <span class="token directive function">@unique</span>
+  <span class="token attr-name">name</span><span class="token punctuation">:</span> String<span class="token operator">!</span>
+  <span class="token attr-name">posts</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>Post<span class="token operator">!</span><span class="token punctuation">]</span><span class="token operator">!</span>
+<span class="token punctuation">}</span>
+
+type Post <span class="token punctuation">{</span>
+  <span class="token attr-name">id</span><span class="token punctuation">:</span> ID<span class="token operator">!</span> <span class="token directive function">@unique</span>
+  <span class="token attr-name">title</span><span class="token punctuation">:</span> String<span class="token operator">!</span>
+<span class="token punctuation">}</span>
+</code></pre><p><strong>生成的schema</strong></p><pre><code>type User implements Node <span class="token punctuation">{</span>
+  <span class="token attr-name">id</span><span class="token punctuation">:</span> ID<span class="token operator">!</span>
+  <span class="token attr-name">name</span><span class="token punctuation">:</span> String<span class="token operator">!</span>
+  posts<span class="token punctuation">(</span>
+    <span class="token attr-name">where</span><span class="token punctuation">:</span> PostWhereInput
+    <span class="token attr-name">orderBy</span><span class="token punctuation">:</span> PostOrderByInput
+    <span class="token attr-name">skip</span><span class="token punctuation">:</span> Int
+    <span class="token attr-name">after</span><span class="token punctuation">:</span> String
+    <span class="token attr-name">before</span><span class="token punctuation">:</span> String
+    <span class="token attr-name">first</span><span class="token punctuation">:</span> Int
+    <span class="token attr-name">last</span><span class="token punctuation">:</span> Int
+  <span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>Post<span class="token operator">!</span><span class="token punctuation">]</span>
+  postsConnection<span class="token punctuation">(</span>
+    <span class="token attr-name">where</span><span class="token punctuation">:</span> PostWhereInput
+    <span class="token attr-name">orderBy</span><span class="token punctuation">:</span> PostOrderByInput
+    <span class="token attr-name">skip</span><span class="token punctuation">:</span> Int
+    <span class="token attr-name">after</span><span class="token punctuation">:</span> String
+    <span class="token attr-name">before</span><span class="token punctuation">:</span> String
+    <span class="token attr-name">first</span><span class="token punctuation">:</span> Int
+    <span class="token attr-name">last</span><span class="token punctuation">:</span> Int
+  <span class="token punctuation">)</span><span class="token punctuation">:</span> PostConnection<span class="token operator">!</span>
+<span class="token punctuation">}</span>
+
+type Post implements Node <span class="token punctuation">{</span>
+  <span class="token attr-name">id</span><span class="token punctuation">:</span> ID<span class="token operator">!</span>
+  <span class="token attr-name">title</span><span class="token punctuation">:</span> String<span class="token operator">!</span>
+<span class="token punctuation">}</span>
+</code></pre><p><strong>Query</strong></p><pre><code><span class="token keyword">query</span> <span class="token punctuation">{</span>
+  user<span class="token punctuation">(</span><span class="token attr-name">where</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token attr-name">id</span><span class="token punctuation">:</span> <span class="token string">"1"</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    name
+    posts <span class="token punctuation">{</span>
+      title
+    <span class="token punctuation">}</span>
+    postsConnection <span class="token punctuation">{</span>
+      edges <span class="token punctuation">{</span>
+        node <span class="token punctuation">{</span>
+          title
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></section></section><section id="sec-Queries.Queries-" secid="2.4.3"><h4><span class="spec-secid" title="link to this section"><a href="#sec-Queries.Queries-">2.4.3</a></span>Queries: 过滤器</h4><ul><li>概述</li><li>数据类型</li><li>单字段</li><li>多字段</li><li>布尔表达式</li><li>交叉关系过滤器</li></ul><section id="sec-Queries.Queries-.-" secid="2.4.3.1"><h5><span class="spec-secid" title="link to this section"><a href="#sec-Queries.Queries-.-">2.4.3.1</a></span>概述</h5><p>OpenCRUD过滤器旨在尽可能多地显示底层数据库的功能，同时保持简单直观的API接口。过滤器可用于所有顶级字段和关系字段。</p></section><section id="sec-Queries.Queries-.-" secid="2.4.3.2"><h5><span class="spec-secid" title="link to this section"><a href="#sec-Queries.Queries-.-">2.4.3.2</a></span>数据类型</h5><p>可用的过滤器取决于字段的类型。例如，Integer字段支持大于过滤器，而String字段支持在子字符串上匹配的contains过滤器。</p><pre><code>type UserWhereInput <span class="token punctuation">{</span>
+  <span class="token attr-name">AND</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>UserWhereInput<span class="token punctuation">]</span>
+  <span class="token attr-name">OR</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>UserWhereInput<span class="token punctuation">]</span>
+
+  <span class="token comment" spellcheck="true"># String field</span>
+  <span class="token attr-name">field</span><span class="token punctuation">:</span> String <span class="token comment" spellcheck="true"># equals</span>
+  <span class="token attr-name">field_not</span><span class="token punctuation">:</span> String <span class="token comment" spellcheck="true"># not equals</span>
+  <span class="token attr-name">field_contains</span><span class="token punctuation">:</span> String <span class="token comment" spellcheck="true"># contains substring</span>
+  <span class="token attr-name">field_not_contains</span><span class="token punctuation">:</span> String <span class="token comment" spellcheck="true"># does not contain substring</span>
+  <span class="token attr-name">field_starts_with</span><span class="token punctuation">:</span> String
+  <span class="token attr-name">field_not_starts_with</span><span class="token punctuation">:</span> String
+  <span class="token attr-name">field_ends_with</span><span class="token punctuation">:</span> String
+  <span class="token attr-name">field_not_ends_with</span><span class="token punctuation">:</span> String
+  <span class="token attr-name">field_lt</span><span class="token punctuation">:</span> String <span class="token comment" spellcheck="true"># less than</span>
+  <span class="token attr-name">field_lte</span><span class="token punctuation">:</span> String <span class="token comment" spellcheck="true"># less then or equals</span>
+  <span class="token attr-name">field_gt</span><span class="token punctuation">:</span> String <span class="token comment" spellcheck="true"># greater than</span>
+  <span class="token attr-name">field_gte</span><span class="token punctuation">:</span> String <span class="token comment" spellcheck="true"># greater than or equals</span>
+  <span class="token attr-name">field_in</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>String<span class="token punctuation">]</span> <span class="token comment" spellcheck="true"># in list</span>
+  <span class="token attr-name">field_not_in</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>String<span class="token punctuation">]</span> <span class="token comment" spellcheck="true"># not in list</span>
+
+  <span class="token comment" spellcheck="true"># Integer field</span>
+  <span class="token attr-name">field</span><span class="token punctuation">:</span> Integer <span class="token comment" spellcheck="true"># equals</span>
+  <span class="token attr-name">field_not</span><span class="token punctuation">:</span> Integer <span class="token comment" spellcheck="true"># not equals</span>
+  <span class="token attr-name">field_lt</span><span class="token punctuation">:</span> Integer <span class="token comment" spellcheck="true"># less than</span>
+  <span class="token attr-name">field_lte</span><span class="token punctuation">:</span> Integer <span class="token comment" spellcheck="true"># less then or equals</span>
+  <span class="token attr-name">field_gt</span><span class="token punctuation">:</span> Integer <span class="token comment" spellcheck="true"># greater than</span>
+  <span class="token attr-name">field_gte</span><span class="token punctuation">:</span> Integer <span class="token comment" spellcheck="true"># greater than or equals</span>
+  <span class="token attr-name">field_in</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>Integer<span class="token punctuation">]</span> <span class="token comment" spellcheck="true"># in list</span>
+  <span class="token attr-name">field_not_in</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>Integer<span class="token punctuation">]</span> <span class="token comment" spellcheck="true"># not in list</span>
+  
+  <span class="token comment" spellcheck="true"># Float field</span>
+  <span class="token attr-name">field</span><span class="token punctuation">:</span> Float <span class="token comment" spellcheck="true"># equals</span>
+  <span class="token attr-name">field_not</span><span class="token punctuation">:</span> Float <span class="token comment" spellcheck="true"># not equals</span>
+  <span class="token attr-name">field_lt</span><span class="token punctuation">:</span> Float <span class="token comment" spellcheck="true"># less than</span>
+  <span class="token attr-name">field_lte</span><span class="token punctuation">:</span> Float <span class="token comment" spellcheck="true"># less then or equals</span>
+  <span class="token attr-name">field_gt</span><span class="token punctuation">:</span> Float <span class="token comment" spellcheck="true"># greater than</span>
+  <span class="token attr-name">field_gte</span><span class="token punctuation">:</span> Float <span class="token comment" spellcheck="true"># greater than or equals</span>
+  <span class="token attr-name">field_in</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>Float<span class="token punctuation">]</span> <span class="token comment" spellcheck="true"># in list</span>
+  <span class="token attr-name">field_not_in</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>Float<span class="token punctuation">]</span> <span class="token comment" spellcheck="true"># not in list</span>
+  
+  <span class="token comment" spellcheck="true"># Boolean field</span>
+  <span class="token attr-name">field</span><span class="token punctuation">:</span> Boolean <span class="token comment" spellcheck="true"># equals</span>
+  <span class="token attr-name">field_not</span><span class="token punctuation">:</span> Boolean <span class="token comment" spellcheck="true"># not equals</span>
+  
+  <span class="token comment" spellcheck="true"># DateTime field</span>
+  <span class="token attr-name">field</span><span class="token punctuation">:</span> DateTime <span class="token comment" spellcheck="true"># equals</span>
+  <span class="token attr-name">field_not</span><span class="token punctuation">:</span> DateTime <span class="token comment" spellcheck="true"># not equals</span>
+  <span class="token attr-name">field_in</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>DateTime<span class="token punctuation">]</span> <span class="token comment" spellcheck="true"># in list</span>
+  <span class="token attr-name">field_not_in</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>DateTime<span class="token punctuation">]</span> <span class="token comment" spellcheck="true"># not in list</span>
+  <span class="token attr-name">field_lt</span><span class="token punctuation">:</span> DateTime <span class="token comment" spellcheck="true"># less than</span>
+  <span class="token attr-name">field_lte</span><span class="token punctuation">:</span> DateTime <span class="token comment" spellcheck="true"># less then or equals</span>
+  <span class="token attr-name">field_gt</span><span class="token punctuation">:</span> DateTime <span class="token comment" spellcheck="true"># greater than</span>
+  <span class="token attr-name">field_gte</span><span class="token punctuation">:</span> DateTime <span class="token comment" spellcheck="true"># greater than or equals</span>
+  
+  <span class="token comment" spellcheck="true"># Enum field</span>
+  <span class="token attr-name">field</span><span class="token punctuation">:</span> Enum <span class="token comment" spellcheck="true"># equals</span>
+  <span class="token attr-name">field_not</span><span class="token punctuation">:</span> Enum <span class="token comment" spellcheck="true"># not equals</span>
+  <span class="token attr-name">field_in</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>Enum<span class="token punctuation">]</span> <span class="token comment" spellcheck="true"># in list</span>
+  <span class="token attr-name">field_not_in</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>Enum<span class="token punctuation">]</span> <span class="token comment" spellcheck="true"># not in list</span>
+  
+  <span class="token comment" spellcheck="true"># List[T] field</span>
+  <span class="token attr-name">field_contains</span><span class="token punctuation">:</span> T <span class="token comment" spellcheck="true"># contains single scalar T</span>
+  <span class="token attr-name">field_contains_every</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>T<span class="token punctuation">]</span> <span class="token comment" spellcheck="true"># contains all scalar T</span>
+  <span class="token attr-name">field_contains_some</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>T<span class="token punctuation">]</span> <span class="token comment" spellcheck="true"># contains at least 1 scalar T</span>
+ 
+  <span class="token comment" spellcheck="true"># many Relation field</span>
+   <span class="token attr-name">field_every</span><span class="token punctuation">:</span> FilterCondition <span class="token comment" spellcheck="true"># condition must be true for all nodes</span>
+  <span class="token attr-name">field_some</span><span class="token punctuation">:</span> FilterCondition <span class="token comment" spellcheck="true"># condition must be true for at least 1 node</span>
+  <span class="token attr-name">field_none</span><span class="token punctuation">:</span> FilterCondition <span class="token comment" spellcheck="true"># condition must be false for all nodes</span>
+  <span class="token attr-name">field_is_null</span><span class="token punctuation">:</span> Boolean <span class="token comment" spellcheck="true"># is the relation field null</span>
+ 
+  <span class="token comment" spellcheck="true"># one Relation field</span>
+  <span class="token attr-name">field</span><span class="token punctuation">:</span> UserWhereInput <span class="token comment" spellcheck="true"># condition must be true for related node</span>
+<span class="token punctuation">}</span>
+</code></pre></section><section id="sec-Queries.Queries-.-" secid="2.4.3.3"><h5><span class="spec-secid" title="link to this section"><a href="#sec-Queries.Queries-.-">2.4.3.3</a></span>单字段</h5><p>与单个数据记录关系的字段允许您按唯一字段上的完全匹配进行过滤：</p><pre><code><span class="token punctuation">{</span>
+  user<span class="token punctuation">(</span><span class="token attr-name">where</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token attr-name">id</span><span class="token punctuation">:</span> <span class="token string">"1"</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    name
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></section><section id="sec-Queries.Queries-.-" secid="2.4.3.4"><h5><span class="spec-secid" title="link to this section"><a href="#sec-Queries.Queries-.-">2.4.3.4</a></span>多字段</h5><p>与许多数据记录关系的字段允许按上面指定的所有过滤器进行过滤：</p><pre><code><span class="token punctuation">{</span>
+  users<span class="token punctuation">(</span><span class="token attr-name">where</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token attr-name">name_not_in</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">"Karl"</span><span class="token punctuation">,</span> <span class="token string">"Viggo"</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    name
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></section><section id="sec-Queries.Queries-.-" secid="2.4.3.5"><h5><span class="spec-secid" title="link to this section"><a href="#sec-Queries.Queries-.-">2.4.3.5</a></span>布尔表达式</h5><p>过滤条件可以嵌套，并使用布尔表达式组合任意<code>AND</code>和<code>OR</code>：</p><pre><code><span class="token punctuation">{</span>
+  users<span class="token punctuation">(</span><span class="token attr-name">where</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token attr-name">OR</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span><span class="token attr-name">name_not_in</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"Karl"</span><span class="token punctuation">,</span> <span class="token string">"Viggo"</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  	<span class="token punctuation">{</span><span class="token attr-name">AND</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token attr-name">id</span><span class="token punctuation">:</span> <span class="token string">"1"</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token attr-name">name</span><span class="token punctuation">:</span> <span class="token string">"Karl"</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    name
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre><p>同一级别的两个过滤条件是显式的<code>AND</code>，因此上面的查询可以简化为：</p><pre><code><span class="token punctuation">{</span>
+  users<span class="token punctuation">(</span><span class="token attr-name">where</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token attr-name">OR</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span><span class="token attr-name">name_not_in</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"Karl"</span><span class="token punctuation">,</span> <span class="token string">"Viggo"</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  	<span class="token punctuation">{</span><span class="token attr-name">id</span><span class="token punctuation">:</span> <span class="token string">"1"</span><span class="token punctuation">,</span> <span class="token attr-name">name</span><span class="token punctuation">:</span> <span class="token string">"Karl"</span><span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    name
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></section><section id="sec-Queries.Queries-.-" secid="2.4.3.6"><h5><span class="spec-secid" title="link to this section"><a href="#sec-Queries.Queries-.-">2.4.3.6</a></span>交叉关系过滤器</h5><p>在关系数据库中，通常基于相关表中的列进行过滤。在OpenCRUD中，这个概念称为关系过滤器。以下查询检索与具有id的帖子相关的所有用户<code>1</code>。</p><pre><code><span class="token punctuation">{</span>
+  users<span class="token punctuation">(</span><span class="token attr-name">where</span><span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token attr-name">posts_some</span><span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token attr-name">id</span><span class="token punctuation">:</span> <span class="token string">"1"</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    name
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>通过反向查询可以实现相同的结果：</p><pre><code><span class="token punctuation">{</span>
+  post<span class="token punctuation">(</span><span class="token attr-name">where</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token attr-name">id</span><span class="token punctuation">:</span> <span class="token string">"1"</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    author <span class="token punctuation">{</span>
+      name
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>关系过滤器与普通过滤器具有相同的功能，可以使用树修改器之一：</p><ul><li>every</li><li>none</li><li>some</li></ul><pre><code><span class="token punctuation">{</span>
+  <span class="token attr-name">every</span><span class="token punctuation">:</span> users<span class="token punctuation">(</span><span class="token attr-name">where</span><span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token attr-name">posts_every</span><span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token attr-name">id</span><span class="token punctuation">:</span> <span class="token string">"1"</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">{</span>name<span class="token punctuation">}</span>
+  <span class="token attr-name">none</span><span class="token punctuation">:</span> users<span class="token punctuation">(</span><span class="token attr-name">where</span><span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token attr-name">posts_none</span><span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token attr-name">id</span><span class="token punctuation">:</span> <span class="token string">"1"</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">{</span>name<span class="token punctuation">}</span>
+  <span class="token attr-name">some</span><span class="token punctuation">:</span> users<span class="token punctuation">(</span><span class="token attr-name">where</span><span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token attr-name">posts_some</span><span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token attr-name">id</span><span class="token punctuation">:</span> <span class="token string">"1"</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">{</span>name<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></section></section><section id="sec-Queries.Queries-" secid="2.4.4"><h4><span class="spec-secid" title="link to this section"><a href="#sec-Queries.Queries-">2.4.4</a></span>Queries: 聚合</h4><ul><li>概述</li><li>聚合函数<ul><li>avg</li><li>median</li><li>max</li><li>min</li><li>count</li><li>sum</li></ul></li><li>分组</li><li>实例: 组合 groupBy and Aggregations</li></ul><p>&gt; WIP. see https://github.com/graphcool/prisma/issues/1312</p></section></section><section id="sec-Mutations" secid="2.5"><h3><span class="spec-secid" title="link to this section"><a href="#sec-Mutations">2.5</a></span>Mutations</h3><section id="sec-Mutations-CRUD" secid="2.5.1"><h4><span class="spec-secid" title="link to this section"><a href="#sec-Mutations-CRUD">2.5.1</a></span>Mutations: CRUD</h4><ul><li>概述</li><li>Create</li><li>Update</li><li>Delete</li></ul><section id="sec-Mutations-CRUD.-" secid="2.5.1.1"><h5><span class="spec-secid" title="link to this section"><a href="#sec-Mutations-CRUD.-">2.5.1.1</a></span>概述</h5><p>OpenCRUD暴露以下mutations以进行简单的数据操作</p></section><section id="sec-Create" secid="2.5.1.2"><h5><span class="spec-secid" title="link to this section"><a href="#sec-Create">2.5.1.2</a></span>Create</h5><p>创建单个数据racord：</p><pre><code><span class="token keyword">mutation</span> <span class="token punctuation">{</span>
+  createUser<span class="token punctuation">(</span><span class="token attr-name">data</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token attr-name">name</span><span class="token punctuation">:</span> <span class="token string">"Karl"</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    id
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></section><section id="sec-Mutations-CRUD.Update" secid="2.5.1.3"><h5><span class="spec-secid" title="link to this section"><a href="#sec-Mutations-CRUD.Update">2.5.1.3</a></span>Update</h5><pre><code><span class="token keyword">mutation</span> <span class="token punctuation">{</span>
+  updateUser<span class="token punctuation">(</span><span class="token attr-name">where</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token attr-name">id</span><span class="token punctuation">:</span> <span class="token string">"1"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token attr-name">data</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token attr-name">name</span><span class="token punctuation">:</span> <span class="token string">"Karl"</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    id
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></section><section id="sec-Mutations-CRUD.Delete" secid="2.5.1.4"><h5><span class="spec-secid" title="link to this section"><a href="#sec-Mutations-CRUD.Delete">2.5.1.4</a></span>Delete</h5><pre><code><span class="token keyword">mutation</span> <span class="token punctuation">{</span>
+  deleteUser<span class="token punctuation">(</span><span class="token attr-name">where</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token attr-name">id</span><span class="token punctuation">:</span> <span class="token string">"1"</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    id
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></section></section><section id="sec-Mutationa-" secid="2.5.2"><h4><span class="spec-secid" title="link to this section"><a href="#sec-Mutationa-">2.5.2</a></span>Mutationa: 批量操作</h4><ul><li>概述</li><li>Update</li><li>Delete</li></ul><section id="sec-Mutationa-.-" secid="2.5.2.1"><h5><span class="spec-secid" title="link to this section"><a href="#sec-Mutationa-.-">2.5.2.1</a></span>概述</h5><p>OpenCRUD暴露了如下mutations以操纵一批数据记录。count字段返回受影响的记录数</p></section><section id="sec-Mutationa-.Update" secid="2.5.2.2"><h5><span class="spec-secid" title="link to this section"><a href="#sec-Mutationa-.Update">2.5.2.2</a></span>Update</h5><pre><code><span class="token keyword">mutation</span> <span class="token punctuation">{</span>
+  updateManyUsers<span class="token punctuation">(</span><span class="token attr-name">where</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token attr-name">name_not</span><span class="token punctuation">:</span> <span class="token string">"Karl"</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token attr-name">data</span><span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token attr-name">name</span><span class="token punctuation">:</span> <span class="token string">"Karl"</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    count
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></section><section id="sec-Mutationa-.Delete" secid="2.5.2.3"><h5><span class="spec-secid" title="link to this section"><a href="#sec-Mutationa-.Delete">2.5.2.3</a></span>Delete</h5><pre><code><span class="token keyword">mutation</span> <span class="token punctuation">{</span>
+  deleteManyUsers<span class="token punctuation">(</span><span class="token attr-name">where</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token attr-name">name_not</span><span class="token punctuation">:</span> <span class="token string">"Karl"</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    count
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></section></section><section id="sec-Mutations-" secid="2.5.3"><h4><span class="spec-secid" title="link to this section"><a href="#sec-Mutations-">2.5.3</a></span>Mutations: 嵌套</h4><section id="sec-Overview" secid="2.5.3.1"><h5><span class="spec-secid" title="link to this section"><a href="#sec-Overview">2.5.3.1</a></span>Overview</h5><p>OpenCRUD嵌套mutations是一种操纵关系数据的强大方法。</p><p>&gt; WIP. See https://github.com/graphcool/prisma/issues/1280</p></section></section></section></section><footer>Written in <a href="http://leebyron.com/spec-md/" target="_blank">Spec Markdown</a>.</footer><input hidden class="spec-sidebar-toggle" type="checkbox" id="spec-sidebar-toggle" aria-hidden /><label for="spec-sidebar-toggle" aria-hidden>&#x2630;</label><div class="spec-sidebar" aria-hidden><div class="spec-toc"><div class="title"><a href="#">OpenCRUD</a></div><ol><li id="_sidebar_1"><a href="#sec-undefined.-"><span class="spec-secid">1</span>概述</a><input hidden class="toggle" type="checkbox" id="_sidebar_toggle_1" /><label for="_sidebar_toggle_1"></label><ol><li id="_sidebar_1.1"><a href="#sec-undefined.-.-"><span class="spec-secid">1.1</span>依据</a></li><li id="_sidebar_1.2"><a href="#sec-undefined.-.-"><span class="spec-secid">1.2</span>参考实现</a></li></ol></li><li id="_sidebar_2"><a href="#sec-undefined.-"><span class="spec-secid">2</span>关系</a><input hidden class="toggle" type="checkbox" id="_sidebar_toggle_2" /><label for="_sidebar_toggle_2"></label><ol><li id="_sidebar_2.1"><a href="#sec-undefined.-.-"><span class="spec-secid">2.1</span>覆盖的领域</a></li><li id="_sidebar_2.2"><a href="#sec--api-"><span class="spec-secid">2.2</span>关注api，不包含实现以及运行时的特性</a></li><li id="_sidebar_2.3"><a href="#sec-SDL"><span class="spec-secid">2.3</span>SDL</a></li><li id="_sidebar_2.4"><a href="#sec-Queries"><span class="spec-secid">2.4</span>Queries</a><input hidden class="toggle" type="checkbox" id="_sidebar_toggle_2.4" /><label for="_sidebar_toggle_2.4"></label><ol><li id="_sidebar_2.4.1"><a href="#sec-Queries.Queries-"><span class="spec-secid">2.4.1</span>Queries: 顶级</a><input hidden class="toggle" type="checkbox" id="_sidebar_toggle_2.4.1" /><label for="_sidebar_toggle_2.4.1"></label><ol><li id="_sidebar_2.4.1.1"><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.1.1</span>概述</a></li><li id="_sidebar_2.4.1.2"><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.1.2</span>单字段</a></li><li id="_sidebar_2.4.1.3"><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.1.3</span>多字段</a></li><li id="_sidebar_2.4.1.4"><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.1.4</span>多连接字段</a></li><li id="_sidebar_2.4.1.5"><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.1.5</span>节点字段</a></li><li id="_sidebar_2.4.1.6"><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.1.6</span>命名</a></li><li id="_sidebar_2.4.1.7"><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.1.7</span>示例</a></li></ol></li><li id="_sidebar_2.4.2"><a href="#sec-Queries.Queries-"><span class="spec-secid">2.4.2</span>Queries: 关系</a><input hidden class="toggle" type="checkbox" id="_sidebar_toggle_2.4.2" /><label for="_sidebar_toggle_2.4.2"></label><ol><li id="_sidebar_2.4.2.1"><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.2.1</span>概述</a></li><li id="_sidebar_2.4.2.2"><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.2.2</span>连接</a></li><li id="_sidebar_2.4.2.3"><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.2.3</span>实例</a></li></ol></li><li id="_sidebar_2.4.3"><a href="#sec-Queries.Queries-"><span class="spec-secid">2.4.3</span>Queries: 过滤器</a><input hidden class="toggle" type="checkbox" id="_sidebar_toggle_2.4.3" /><label for="_sidebar_toggle_2.4.3"></label><ol><li id="_sidebar_2.4.3.1"><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.3.1</span>概述</a></li><li id="_sidebar_2.4.3.2"><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.3.2</span>数据类型</a></li><li id="_sidebar_2.4.3.3"><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.3.3</span>单字段</a></li><li id="_sidebar_2.4.3.4"><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.3.4</span>多字段</a></li><li id="_sidebar_2.4.3.5"><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.3.5</span>布尔表达式</a></li><li id="_sidebar_2.4.3.6"><a href="#sec-Queries.Queries-.-"><span class="spec-secid">2.4.3.6</span>交叉关系过滤器</a></li></ol></li><li id="_sidebar_2.4.4"><a href="#sec-Queries.Queries-"><span class="spec-secid">2.4.4</span>Queries: 聚合</a></li></ol></li><li id="_sidebar_2.5"><a href="#sec-Mutations"><span class="spec-secid">2.5</span>Mutations</a><input hidden class="toggle" type="checkbox" id="_sidebar_toggle_2.5" /><label for="_sidebar_toggle_2.5"></label><ol><li id="_sidebar_2.5.1"><a href="#sec-Mutations-CRUD"><span class="spec-secid">2.5.1</span>Mutations: CRUD</a><input hidden class="toggle" type="checkbox" id="_sidebar_toggle_2.5.1" /><label for="_sidebar_toggle_2.5.1"></label><ol><li id="_sidebar_2.5.1.1"><a href="#sec-Mutations-CRUD.-"><span class="spec-secid">2.5.1.1</span>概述</a></li><li id="_sidebar_2.5.1.2"><a href="#sec-Create"><span class="spec-secid">2.5.1.2</span>Create</a></li><li id="_sidebar_2.5.1.3"><a href="#sec-Mutations-CRUD.Update"><span class="spec-secid">2.5.1.3</span>Update</a></li><li id="_sidebar_2.5.1.4"><a href="#sec-Mutations-CRUD.Delete"><span class="spec-secid">2.5.1.4</span>Delete</a></li></ol></li><li id="_sidebar_2.5.2"><a href="#sec-Mutationa-"><span class="spec-secid">2.5.2</span>Mutationa: 批量操作</a><input hidden class="toggle" type="checkbox" id="_sidebar_toggle_2.5.2" /><label for="_sidebar_toggle_2.5.2"></label><ol><li id="_sidebar_2.5.2.1"><a href="#sec-Mutationa-.-"><span class="spec-secid">2.5.2.1</span>概述</a></li><li id="_sidebar_2.5.2.2"><a href="#sec-Mutationa-.Update"><span class="spec-secid">2.5.2.2</span>Update</a></li><li id="_sidebar_2.5.2.3"><a href="#sec-Mutationa-.Delete"><span class="spec-secid">2.5.2.3</span>Delete</a></li></ol></li><li id="_sidebar_2.5.3"><a href="#sec-Mutations-"><span class="spec-secid">2.5.3</span>Mutations: 嵌套</a><input hidden class="toggle" type="checkbox" id="_sidebar_toggle_2.5.3" /><label for="_sidebar_toggle_2.5.3"></label><ol><li id="_sidebar_2.5.3.1"><a href="#sec-Overview"><span class="spec-secid">2.5.3.1</span>Overview</a></li></ol></li></ol></li></ol></li></ol></div><script>(function (){
+var currentSection;
+var numberedSections = [];
+
+var sections = document.getElementsByTagName('section');
+for (var i = 0; i < sections.length; i++) {
+  if (sections[i].getAttribute('secid')) {
+    numberedSections.push(sections[i]);
+  }
+}
+
+var scrollPos = window.scrollY;
+var pending = false;
+window.addEventListener('scroll', function (e) {
+  scrollPos = window.scrollY;
+  if (!pending) {
+    pending = true;
+    window.requestAnimationFrame(function () {
+      updateSectionFocus(scrollPos);
+      pending = false;
+    });
+  }
+});
+
+function updateSectionFocus(pos) {
+  var readLine = pos + document.documentElement.clientHeight / 4;
+
+  var focusedSection;
+  for (var n = numberedSections.length - 1; n >= 0; n--) {
+    if (numberedSections[n].offsetTop < readLine) {
+      focusedSection = numberedSections[n];
+      break;
+    }
+  }
+
+  var secid = focusedSection && focusedSection.getAttribute('secid');
+  if (secid !== currentSection) {
+    currentSection && fold(currentSection, false);
+    secid && fold(secid, true);
+    currentSection = secid;
+  }
+}
+
+function fold(secid, check) {
+  document.getElementById('_sidebar_' + secid).className = check ? 'viewing' : '';
+  var sections = secid.split('.');
+  while (sections.length) {
+    var toggle = document.getElementById('_sidebar_toggle_' + sections.join('.'));
+    if (toggle) {
+      toggle.checked = check;
+    }
+    sections.pop();
+  }
+}
+
+updateSectionFocus(window.scrollY);
+})()</script></div></body></html>
